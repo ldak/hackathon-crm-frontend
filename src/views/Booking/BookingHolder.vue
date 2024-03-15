@@ -1,16 +1,19 @@
 
 <template>
-    <div class="flex-center md:p-10 h-full w-full bg-gray-50">
-        <div v-if="!!bookingStore.getAccount" class="flex max-w-md w-full sm:rounded-md overflow-hidden h-full sm:border bor">
-            <div class="bg-white flex flex-col">
-                <div class="p-10" @click="goBack">
-                    <ChevronLeftIcon class="w-4"/>
+    <div class="flex-center md:p-10 h-full w-full bg-gray-100">
+        <div v-if="!!bookingStore.getAccount" class="flex flex-col max-w-sm w-full sm:rounded-lg bg-gray-50 drop-shadow-lg overflow-hidden h-full sm:border bor">
+            <div class="bg-white relative">
+                <div class="flex items-center">
+                    <div class="p-4" @click="goBack">
+                        <ChevronLeftIcon class="w-10"/>
+                    </div>
+                    <p class="text-lg font-bold">{{bookingStore.getAccount.name}}</p>
                 </div>
-                <div class="flex items-center w-full h-full">
-                    <p class="text-lg">{{bookingStore.getAccount.name}}</p>
+                <div class="w-full h-0.5 bg-gray-100">
+                    <div :class="{'w-1/3': route.name === 'booking.service'}" class="bg-blue-400 h-full"></div>
                 </div>
             </div>
-            <div class="overflow-y-auto flex-1">
+            <div class="overflow-y-auto flex-1 relative">
                 <router-view v-slot="{ Component }">
                     <transition
                         :enter-active-class="state.enterClass"
@@ -27,10 +30,11 @@
 <script setup>
 import {ChevronLeftIcon} from "@heroicons/vue/20/solid";
 import {useBookingStore} from "../../store/booking/index.ts";
-import {onMounted, reactive} from "vue";
-import {useRoute} from "vue-router";
+import {nextTick, onMounted, reactive} from "vue";
+import {useRoute, useRouter} from "vue-router";
 
 const route = useRoute();
+const router = useRouter();
 const bookingStore = useBookingStore();
 
 const state = reactive({
@@ -38,7 +42,14 @@ const state = reactive({
     leaveClass: 'slide-out-left',
 })
 
-const goBack = ()=>{
+const goBack = async ()=>{
+    state.enterClass = 'slide-in-left';
+    state.leaveClass = 'slide-out-right';
+    await nextTick();
+    await router.go(-1);
+    await new Promise(resolve => setTimeout(resolve, 500));
+    state.enterClass = 'slide-in-right';
+    state.leaveClass = 'slide-out-left';
 
 }
 
@@ -54,7 +65,7 @@ onMounted(async ()=>{
 
 .slide-in-right {
     position: absolute;
-    top: 52px;
+    top: 0px;
     z-index: 100;
     -webkit-animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
@@ -92,7 +103,7 @@ onMounted(async ()=>{
 
 .slide-in-left{
     position: absolute;
-    top: 52px;
+    top: 0px;
     -webkit-animation:slide-in-left .5s cubic-bezier(.25,.46,.45,.94) both;
     animation:slide-in-left .5s cubic-bezier(.25,.46,.45,.94) both
 }

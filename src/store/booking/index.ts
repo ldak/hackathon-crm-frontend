@@ -16,6 +16,7 @@ export const useBookingStore = defineStore('user', {
     }),
     getters: {
         getAccount: (state :BookingStateI):AccountI => state.account,
+        getServices: (state :BookingStateI):ServiceI[] => state.services,
     },
     actions: {
         async loadStore(account_id: string){

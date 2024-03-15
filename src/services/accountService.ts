@@ -12,12 +12,12 @@ export default {
             return {
                 data: {
                     account: {
-                        id: 12,
+                        uid: 12,
                         name: "Hello Kitty",
                     },
                     services: [
                         {
-                            id: 1323,
+                            uid: 1323,
                             name: "Купи котка",
                             duration: 234,
                         }
