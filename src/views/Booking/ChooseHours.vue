@@ -9,25 +9,33 @@
                     {{monthYear}}
                 </div>
                 <div class="flex gap-2">
-                    <button :disabled="state.weekDate < new Date()" class="p-4" @click="moveBack()" >
+                    <button :disabled="state.weekDate < new Date()" class="p-4"
+                            @click="moveBack()" >
                         <ChevronLeftIcon class="w-5 text-blue-400"/>
                     </button>
-                    <button :disabled="moment().diff(state.weekDate, 'days') == 25" class="p-4" @click="state.weekDate = state.weekDate.add(5, 'days')" >
+                    <button :disabled="moment().diff(state.weekDate, 'days') == -24" class="p-4"
+                            @click="moveForward()" >
                         <ChevronRightIcon class="w-5 text-blue-400"/>
                     </button>
                 </div>
             </div>
-            <div class="flex" :style="'transition:' + moment().diff(state.weekDate, 'days') / 5 * 100 + '%'">
-                <div v-for="i in 30"
-                     class="min-w-16 flex flex-col items-center"
+            <div class="flex transition-all duration-500 " :style="transitionComputed">
+                <button v-for="i in 30"
+                     class="flex flex-col gap-2 items-center cursor-pointer"
+                     style="min-width: 20%"
+                     @click="state.selectedDate = moment(state.baseDate).add(i, 'days').toDate()"
                      >
-                    <div class="text-sm text-gray-600">
+                    <span class="text-sm text-gray-600"
+                         :class="{
+                            'text-blue-400': moment(state.baseDate).diff(state.selectedDate, 'days')==-i,
+                        }">
                         {{moment().add(i, 'days').locale('bg').format('ddd')}}
-                    </div>
-                    <div class="w-9 h-9 flex-center text-md">
+                    </span>
+                    <span class="w-9 h-9 flex-center text-md rounded-md"
+                         :class="{'bg-blue-400 text-white': moment(state.baseDate).diff(state.selectedDate, 'days')==-i}">
                         {{moment().add(i, 'days').format('D')}}
-                    </div>
-                </div>
+                    </span>
+                </button>
             </div>
             <div class="h-px w-full bg-gray-100 "></div>
             <div class="grid">
@@ -48,16 +56,30 @@ import {useBookingStore} from "../../store/booking";
 const bookingStore = useBookingStore();
 
 const state = reactive({
-    weekDate: moment(),
+    baseDate: new Date(),
+    weekDate: new Date(),
     selectedDate: null,
 })
 
 const monthYear = computed(()=>{
-    return state.weekDate.locale("bg").format("YYYY MMMM");
+    return moment(state.weekDate).locale("bg").format("YYYY MMMM");
 })
 
+const transitionComputed =computed(()=>{
+    return {
+        translate: Math.floor(moment().diff(state.weekDate, 'days') / 5) * 100 + '%'
+    }
+})
 const moveBack = ()=>{
-    state.weekDate = state.weekDate.add(5, 'days')
+    console.log(moment(state.weekDate).format())
+    state.weekDate = moment(state.weekDate).subtract(5, 'days').toDate();
+    console.log(moment(state.weekDate).format());
+
+}
+const moveForward = ()=>{
+    console.log(moment(state.weekDate).format())
+    state.weekDate = moment(state.weekDate).add(5, 'days').toDate()
+    console.log(moment(state.weekDate).format())
 }
 </script>
 

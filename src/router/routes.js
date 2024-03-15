@@ -21,7 +21,7 @@ export default [
                 component: ()=> import('../views/Booking/ChooseService.vue'),
             },
             {
-                path: 'service',
+                path: 'hours',
                 name: 'booking.hours',
                 component: ()=> import('../views/Booking/ChooseHours.vue'),
             }
