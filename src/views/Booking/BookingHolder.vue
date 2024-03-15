@@ -10,7 +10,8 @@
                     <p class="text-lg font-bold">{{bookingStore.getAccount.name}}</p>
                 </div>
                 <div class="w-full h-0.5 bg-gray-100">
-                    <div :class="{'w-1/3': route.name === 'booking.service'}" class="bg-blue-400 h-full"></div>
+                    <div :class="{'w-1/3': route.name === 'booking.service', 'w-2/3' : route.name === 'booking.hours'}"
+                         class="bg-blue-400 h-full"></div>
                 </div>
             </div>
             <div class="overflow-y-auto flex-1 relative">

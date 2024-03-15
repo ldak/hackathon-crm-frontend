@@ -36,8 +36,12 @@ app.component('VDatePicker', DatePicker);
         await app.mount('#app');
         return;
     }
-    const userStore = useUserStore();
-    await userStore.loginToken(token)
+    try{
+        const userStore = useUserStore();
+        await userStore.loginToken(token)
+    }catch (e){
+        localStorage.removeItem("authorization")
+    }
     await app.mount('#app');
 
 

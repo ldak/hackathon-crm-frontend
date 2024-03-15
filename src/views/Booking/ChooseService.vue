@@ -2,7 +2,7 @@
 <template>
     <div class="h-full w-full relative">
         <div class="flex flex-col p-4 gap-4 h-full">
-            <div class="">Избери услуга:</div>
+            <div class="font-semibold">Избери услуга:</div>
 
             <div v-for="service in bookingStore.getServices"
                  @click="selectService(service)"
@@ -40,7 +40,7 @@ const bookingStore = useBookingStore();
 const router = useRouter();
 
 const state = reactive({
-    selectedService: null,
+    selectedService: bookingStore.getSelectService,
 })
 
 const selectService = (service: ServiceI)=>{
@@ -52,6 +52,7 @@ const selectService = (service: ServiceI)=>{
 }
 
 const submit = () =>{
+    bookingStore.selectService(state.selectedService);
     router.push({name: 'booking.hours'})
 }
 </script>

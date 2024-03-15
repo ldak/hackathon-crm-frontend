@@ -24,6 +24,13 @@ export default {
                     ]
                 }
             }
+        },
+        getAvailability: async (account_id: string) =>{
+            return {
+                data: {
+                    '2023-12-23':[ '2023-12-23 12:00', '2023-12-23 12:30']
+                }
+            }
         }
     }
 }

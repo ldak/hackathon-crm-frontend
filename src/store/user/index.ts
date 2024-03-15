@@ -24,11 +24,10 @@ export const useUserStore = defineStore('user', {
         async login(email :string, password :string): Promise<void> {
             const {
                 data: {
-                    Token: token, User: user
+                    access_token: token
                 }
             } = await userService.post.authenticate(email, password)
-            this.setAuthToken(token)
-            this.user = user;
+            await this.loginToken(token)
         },
         async loginToken(token :string) {
             this.setAuthToken(token);
