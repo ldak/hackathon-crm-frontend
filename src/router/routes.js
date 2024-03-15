@@ -12,6 +12,17 @@ export default [
         component: () => import('../views/Login.vue')
     },
     {
+        path: '/booking/:account',
+        component: ()=> import('../views/Booking/BookingHolder.vue'),
+        children: [
+            {
+                path: 'service',
+                name: 'booking.service',
+                component: ()=> import('../views/Booking/ChooseService.vue'),
+            }
+        ]
+    },
+    {
         path: '/admin',
         component: ()=> import('../views/Admin/Layout/AdminLayout.vue'),
         children: [

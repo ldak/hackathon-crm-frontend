@@ -57,13 +57,13 @@ import {
 import {computed} from "vue";
 
 const navigation = computed(()=> [
-    {name: 'Поръчки', to: {name: "admin.orders"}, icon: ShoppingCartIcon},
-    {name: 'Потребители', to: {name: "admin.users"}, icon: UsersIcon},
-    {name: 'Производители',  to: {name: "admin.producers"}, icon: BuildingOfficeIcon},
-    {name: 'Продукти',  to: {name: "admin.products"}, icon: CubeIcon},
-    {name: 'Обекти',  to: {name: "admin.stores"}, icon: BuildingStorefrontIcon},
-    {name: 'Отстъпки',  to: {name: "admin.discounts"}, icon: TagIcon},
-    {name: 'Региони',  to: {name: "admin.regions"}, icon: PuzzlePieceIcon},
+    // {name: 'Поръчки', to: {name: "admin.orders"}, icon: ShoppingCartIcon},
+    // {name: 'Потребители', to: {name: "admin.users"}, icon: UsersIcon},
+    // {name: 'Производители',  to: {name: "admin.producers"}, icon: BuildingOfficeIcon},
+    // {name: 'Продукти',  to: {name: "admin.products"}, icon: CubeIcon},
+    // {name: 'Обекти',  to: {name: "admin.stores"}, icon: BuildingStorefrontIcon},
+    // {name: 'Отстъпки',  to: {name: "admin.discounts"}, icon: TagIcon},
+    // {name: 'Региони',  to: {name: "admin.regions"}, icon: PuzzlePieceIcon},
     // {name: 'Calendar', to: {name: "admin.users"}, icon: CalendarIcon, current: false},
     // {name: 'Documents',  to: {name: "admin.users"}, icon: DocumentDuplicateIcon, current: false},
     // {name: 'Reports',  to: {name: "admin.users"}, icon: ChartPieIcon, current: false},

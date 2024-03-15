@@ -9,8 +9,6 @@ import { Skeletor } from 'vue-skeletor';
 import * as Yup from 'yup';
 import { setupCalendar, Calendar, DatePicker } from 'v-calendar';
 import 'v-calendar/style.css';
-import {UserType} from "./services/interfaces.ts";
-import {useTripStore} from "./store/trip/index.ts";
 
 Yup.setLocale({
     mixed: {
@@ -36,30 +34,11 @@ app.component('VDatePicker', DatePicker);
     const token = localStorage.getItem("authorization");
     if(!token){
         await app.mount('#app');
-        router.push({name: "login"})
         return;
     }
+    const userStore = useUserStore();
+    await userStore.loginToken(token)
+    await app.mount('#app');
 
-    const userStore = useUserStore()
-    try{
-        await userStore.loginToken(token)
-        if(userStore.user.Type === UserType.Driver){
-            const tripStore = useTripStore();
-            await tripStore.loadTrip();
-            await app.mount('#app');
-            if(tripStore.isTripStarted){
-                await router.push({name: 'driver.store', params:{index: 0}})
-                return;
-            }
-            await router.push({name: 'driver.trip.start', params:{index: 0}})
-            return;
-        }
-        await app.mount('#app');
-
-    }catch (e){
-        await app.mount('#app');
-        localStorage.removeItem('authorization')
-        await router.push({name: "login"})
-    }
 
 })()

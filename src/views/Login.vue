@@ -33,9 +33,7 @@ import { object, string } from 'yup';
 import {useUserStore} from "../store/user";
 import {Toast} from "../swal/index.js";
 import ValidatedInput from "../components/Forms/ValidatedInput.vue";
-import {UserType} from "../services/interfaces";
 import {useRouter} from "vue-router";
-import {useTripStore} from "../store/trip/index.ts";
 
 const router = useRouter();
 const userStore = useUserStore();
@@ -63,17 +61,8 @@ const submit = async ({email, password}) => {
     }
 
     state.loading = false;
-    if (userStore.getUser.Type === UserType.Admin){
-        await router.push({name: "admin.users"})
-    }else{
-        const tripStore = useTripStore();
-        await tripStore.loadTrip();
-        if(tripStore.isTripStarted){
-            await router.push({name: 'driver.store', params:{index: 0}})
-            return;
-        }
-        await router.push({name: 'driver.trip.start', params:{index: 0}})
-    }
+    await router.push({name: "admin.users"})
+
 }
 
 </script>
