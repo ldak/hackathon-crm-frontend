@@ -10,7 +10,10 @@
                     <p class="text-lg font-bold">{{bookingStore.getAccount.name}}</p>
                 </div>
                 <div class="w-full h-0.5 bg-gray-100">
-                    <div :class="{'w-1/3': route.name === 'booking.service', 'w-2/3' : route.name === 'booking.hours'}"
+                    <div :class="{'w-1/4': route.name === 'booking.service',
+                                    'w-2/4' : route.name === 'booking.hours',
+                                    'w-3/4': route.name === 'booking.customer',
+                                    'w-7/8' : route.name === 'booking.otp'}"
                          class="bg-blue-400 h-full"></div>
                 </div>
             </div>

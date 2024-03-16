@@ -57,7 +57,7 @@ export const useBookingStore = defineStore('user', {
         async setCustomer(name: string, phone: string){
             const {
                 data: customer,
-            } = await appointmentService.get.getCustomer(name, phone);
+            } = await appointmentService.post.getCustomer(name, phone);
             this.customer = customer;
         },
         async bookAppointment(otp: string) {
