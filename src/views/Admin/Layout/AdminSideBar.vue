@@ -36,12 +36,14 @@
 <!--                    </ul>-->
 <!--                </li>-->
                 <li class="mt-auto">
-                    <a href="#"
-                       class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-indigo-200 hover:bg-indigo-700 hover:text-white">
-                        <Cog6ToothIcon class="h-6 w-6 shrink-0 text-indigo-200 group-hover:text-white"
+                    <router-link :to="{name: 'admin.settings'}"
+                                 v-slot="{ isActive }"
+                                 active-class="bg-indigo-700 text-white"
+                                 :class="['text-indigo-200 hover:text-white hover:bg-indigo-700', 'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold']">
+                        <Cog6ToothIcon :class="[isActive ? 'text-white' : 'text-indigo-200 group-hover:text-white', 'h-6 w-6 shrink-0']"
                                        aria-hidden="true"/>
-                        Settings
-                    </a>
+                        Настройки
+                    </router-link>
                 </li>
             </ul>
         </nav>
@@ -51,14 +53,14 @@
 <script setup>
 import {
     BuildingOfficeIcon, BuildingStorefrontIcon, CalendarIcon,
-    Cog6ToothIcon, CubeIcon, PuzzlePieceIcon, ShoppingCartIcon, TagIcon,
+    Cog6ToothIcon, CubeIcon, PaperAirplaneIcon, PuzzlePieceIcon, ShoppingCartIcon, TagIcon,
     UsersIcon,
 } from '@heroicons/vue/24/outline'
 import {computed} from "vue";
 
 const navigation = computed(()=> [
     {name: 'Календар', to: {name: "admin.calendar"}, icon: CalendarIcon},
-    // {name: 'Потребители', to: {name: "admin.users"}, icon: UsersIcon},
+    {name: 'Автоматизации', to: {name: "admin.automations"}, icon: PaperAirplaneIcon},
     // {name: 'Производители',  to: {name: "admin.producers"}, icon: BuildingOfficeIcon},
     // {name: 'Продукти',  to: {name: "admin.products"}, icon: CubeIcon},
     // {name: 'Обекти',  to: {name: "admin.stores"}, icon: BuildingStorefrontIcon},

@@ -33,7 +33,7 @@
                         <span class="sr-only">Open user menu</span>
 <!--                        Avatar Icon-->
                         <div class="h-8 w-8 rounded-full bg-indigo-600 flex-center">
-                            <div class="font-bold text-white text-sm">
+                            <div class="font-bold text-white text-xs">
                                 {{userStore.getInitials}}
                             </div>
                         </div>
