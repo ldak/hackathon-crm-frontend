@@ -16,6 +16,10 @@ export interface ServiceI {
     duration: number,
 }
 
+interface IntervalI{
+    start: string,
+    end: string,
+}
 export interface AvailabilityI {
-    [key: string]: string[];
+    [key: string]: IntervalI[];
 }

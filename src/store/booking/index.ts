@@ -4,6 +4,7 @@ import client from "../../client/index";
 import {AccountI, AvailabilityI, ServiceI} from "../../services/interfaces";
 import accountService from "../../services/accountService";
 import serviceService from "../../services/serviceService";
+import appointmentService from "../../services/appointmentService";
 
 
 interface BookingStateI {
@@ -11,6 +12,8 @@ interface BookingStateI {
     services: ServiceI[],
     selectedService: ServiceI,
     availability: AvailabilityI,
+    selectedHour: string,
+    customer: object,
 }
 
 export const useBookingStore = defineStore('user', {
@@ -19,11 +22,14 @@ export const useBookingStore = defineStore('user', {
         services: null,
         selectedService: null,
         availability: null,
+        selectedHour: null,
+        customer: null,
     }),
     getters: {
         getAccount: (state :BookingStateI):AccountI => state.account,
         getServices: (state :BookingStateI):ServiceI[] => state.services,
-        getSelectService: (state:BookingStateI):ServiceI => state.selectedService,
+        getSelectedService: (state:BookingStateI):ServiceI => state.selectedService,
+        getAvailability: (state:BookingStateI):AvailabilityI => state.availability,
     },
     actions: {
         async loadStore(account_id: string){
@@ -43,6 +49,15 @@ export const useBookingStore = defineStore('user', {
                 data: availability
             } = await accountService.get.getAvailability(this.account.uuid);
             this.availability = availability;
+        },
+        setHour(hour: string){
+            this.selectedHour = hour;
+        },
+        async setCustomer(name: string, phone: string){
+            const {
+                data: customer,
+            } = await appointmentService.get.getCustomer(name, phone);
+            this.customer = customer;
         }
 
     },

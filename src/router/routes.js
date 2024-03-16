@@ -24,7 +24,22 @@ export default [
                 path: 'hours',
                 name: 'booking.hours',
                 component: ()=> import('../views/Booking/ChooseHours.vue'),
-            }
+            },
+            {
+                path: 'customer',
+                name: 'booking.customer',
+                component: ()=> import('../views/Booking/ChooseCustomer.vue'),
+            },
+            {
+                path: 'otp',
+                name: 'booking.otp',
+                component: ()=> import('../views/Booking/TypeOtp.vue'),
+            },
+            {
+                path: 'success',
+                name: 'booking.success',
+                component: ()=> import('../views/Booking/BookingSuccess.vue'),
+            },
         ]
     },
     {

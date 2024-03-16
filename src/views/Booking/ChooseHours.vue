@@ -1,7 +1,7 @@
 
 <template>
 <div class="h-full w-full relative">
-    <div class="flex flex-col p-4 gap-4 h-full w-full">
+    <div v-if="bookingStore.getAvailability" class="flex flex-col p-4 gap-4 h-full w-full">
         <div class="font-semibold">Избери час:</div>
         <div class="border p-4 bg-white border-gray-100 flex flex-col gap-5 w-full overflow-x-hidden">
             <div class="flex justify-between">
@@ -9,11 +9,11 @@
                     {{monthYear}}
                 </div>
                 <div class="flex gap-2">
-                    <button :disabled="state.weekDate < new Date()" class="p-4"
+                    <button :disabled="state.weekDate < new Date()" class=""
                             @click="moveBack()" >
                         <ChevronLeftIcon class="w-5 text-blue-400"/>
                     </button>
-                    <button :disabled="moment().diff(state.weekDate, 'days') == -24" class="p-4"
+                    <button :disabled="moment().diff(state.weekDate, 'days') == -24" class=""
                             @click="moveForward()" >
                         <ChevronRightIcon class="w-5 text-blue-400"/>
                     </button>
@@ -21,10 +21,10 @@
             </div>
             <div class="flex transition-all duration-500 " :style="transitionComputed">
                 <button v-for="i in 30"
-                     class="flex flex-col gap-2 items-center cursor-pointer"
-                     style="min-width: 20%"
-                     @click="state.selectedDate = moment(state.baseDate).add(i, 'days').toDate()"
-                     >
+                        :disabled="!bookingStore.getAvailability[moment(state.baseDate).add(i, 'days').format('YYYY-MM-DD')]"
+                        class="flex flex-col gap-2 items-center cursor-pointer disabled:opacity-70"
+                        style="min-width: 20%"
+                        @click="state.selectedDate = moment(state.baseDate).add(i, 'days').toDate()">
                     <span class="text-sm text-gray-600"
                          :class="{
                             'text-blue-400': moment(state.baseDate).diff(state.selectedDate, 'days')==-i,
@@ -38,16 +38,33 @@
                 </button>
             </div>
             <div class="h-px w-full bg-gray-100 "></div>
-            <div class="grid">
-
+            <div v-if="state.selectedDate" class="grid grid-cols-2 gap-4">
+                <button v-for="hour in bookingStore.getAvailability[moment(state.selectedDate).format('YYYY-MM-DD')]"
+                        @click="state.selectedHour = hour.start"
+                     :class="{
+                        'secondary-button' : hour.start !== state.selectedHour,
+                        'primary-button' : hour.start === state.selectedHour
+                    }">
+                    {{moment(hour.start, 'YYYY-MM-DD HH:mm:ss').format('HH:mm')}}
+                </button>
             </div>
         </div>
     </div>
+    <transition name="fade" mode="out-in">
+        <div v-if="state.selectedHour" class="pt-3 px-6 pb-5 w-full border-t border-gray-250 absolute bottom-0 h-min flex gap-4 items-center justify-around">
+            <button @click="state.selectedHour = null" class="secondary-button h-11 flex-1">
+                Отказ
+            </button>
+            <button @click="submit" class="primary-button h-11 flex-1">
+                Напред
+            </button>
+        </div>
+    </transition>
 </div>
 </template>
 
-<script setup lang="ts">
-import {computed, reactive} from "vue";
+<script setup>
+import {computed, onBeforeMount, onMounted, reactive} from "vue";
 import * as moment from "moment/moment";
 import 'moment/locale/bg'
 import {ChevronLeftIcon, ChevronRightIcon} from "@heroicons/vue/20/solid";
@@ -59,6 +76,7 @@ const state = reactive({
     baseDate: new Date(),
     weekDate: new Date(),
     selectedDate: null,
+    selectedHour: null,
 })
 
 const monthYear = computed(()=>{
@@ -81,6 +99,15 @@ const moveForward = ()=>{
     state.weekDate = moment(state.weekDate).add(5, 'days').toDate()
     console.log(moment(state.weekDate).format())
 }
+
+const submit = ()=>{
+    bookingStore.setHour(state.selectedHour);
+    router.push({name: ''})
+}
+
+onBeforeMount(()=>{
+   bookingStore.selectService(bookingStore.getSelectedService);
+});
 </script>
 
 <style scoped>
