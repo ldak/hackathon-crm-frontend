@@ -3,7 +3,7 @@ import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-    <div class="w-screen h-screen">
+    <div class="w-full h-screen">
         <router-view v-slot="{ Component }">
             <transition
                     enter-active-class="fade-in"
