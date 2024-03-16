@@ -67,7 +67,8 @@
 
 <script setup>
 import {computed, onBeforeMount, onMounted, reactive} from "vue";
-import * as moment from "moment/moment";
+import * as moment_ from 'moment';
+const moment = moment_;
 import 'moment/locale/bg'
 import {ChevronLeftIcon, ChevronRightIcon} from "@heroicons/vue/20/solid";
 import {useBookingStore} from "../../store/booking";
