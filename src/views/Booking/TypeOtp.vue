@@ -3,7 +3,8 @@
     <div class="h-full w-full relative">
         <div class="flex flex-col p-4 pt-20 items-center gap-4 h-full w-full">
             <div class="font-bold text-xl">Потвърждение</div>
-            <div class="text-sm text-center">Въведете еднократния код изпратен на: {{bookingStore.getCustomer.phone}}</div>
+            <div v-if="bookingStore.getCustomer.phone"
+                 class="text-sm text-center">Въведете еднократния код изпратен на: {{bookingStore.getCustomer.phone}}</div>
             <input class="tail-input w-full" v-model="state.otp" type="number">
         </div>
          <transition enter-active-class="slide-in-bottom"
