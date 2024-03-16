@@ -1,7 +1,7 @@
 <template>
     <div class="flex min-h-full flex-1 flex-col justify-center px-10 py-12 lg:px-8 w-full">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-            <h2 class="mt-10 text-left text-2xl font-bold leading-9 tracking-tight text-gray-900">Влез в акаунта си</h2>
+            <h2 class="mt-10 text-left text-2xl font-bold leading-9 tracking-tight text-gray-900">Добре дошли в Appointmate</h2>
         </div>
 
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm max-w-2xl">

@@ -17,7 +17,7 @@
                          class="bg-blue-400 h-full"></div>
                 </div>
             </div>
-            <div class="overflow-y-auto flex-1 relative">
+            <div class="no-scroll overflow-clip flex-1 relative">
                 <router-view v-slot="{ Component }">
                     <transition
                         :enter-active-class="state.enterClass"

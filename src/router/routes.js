@@ -56,7 +56,7 @@ export default [
                 path: 'automations',
                 name: 'admin.automations',
                 component: () => import('../views/Admin/Automations.vue'),
-                meta: {title: 'Автоматизации'}
+                meta: {title: 'Автоматизирани съобщения'}
             },
             {
                 path: 'settings',

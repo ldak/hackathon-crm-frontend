@@ -1,6 +1,6 @@
 <template>
-<div class="">
-
+<div class="w-full">
+    <div class=""></div>
 </div>
 </template>
 
