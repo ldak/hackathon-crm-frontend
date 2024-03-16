@@ -1,36 +1,15 @@
 import {AxiosResponse} from "axios";
-import {AccountI, ServiceI, UserI} from "./interfaces";
+import {AccountI, AvailabilityI} from "./interfaces";
+import client from "../client";
 
-interface InfoI{
-    account: AccountI,
-    services: ServiceI[],
-}
+
 export default {
     get: {
-        // getInfo: async () :Promise<AxiosResponse<InfoI>> => {
-        getInfo: async (account_id: string) => {
-            return {
-                data: {
-                    account: {
-                        uid: 12,
-                        name: "Hello Kitty",
-                    },
-                    services: [
-                        {
-                            uid: 1323,
-                            name: "Купи котка",
-                            duration: 234,
-                        }
-                    ]
-                }
-            }
+        show: async (account_id: string) :Promise<AxiosResponse<AccountI>> => {
+            return client.get<AccountI>('account/' + account_id);
         },
-        getAvailability: async (account_id: string) =>{
-            return {
-                data: {
-                    '2023-12-23':[ '2023-12-23 12:00', '2023-12-23 12:30']
-                }
-            }
+        getAvailability: async (account_id: string):Promise<AxiosResponse<AvailabilityI>> =>{
+            return client.get<AvailabilityI>('account/' + account_id + '/availability');
         }
     }
 }

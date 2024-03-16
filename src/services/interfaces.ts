@@ -1,17 +1,17 @@
 export interface UserI {
-    uid: number,
+    uuid: number,
     account_id: number,
     name: string,
     email: string,
 }
 
 export interface AccountI {
-    uid: number,
+    uuid: number,
     name: string,
 }
 
 export interface ServiceI {
-    uid: number,
+    uuid: number,
     name: string,
     duration: number,
 }

@@ -3,6 +3,7 @@ import userService from "../../services/userService";
 import client from "../../client/index";
 import {AccountI, AvailabilityI, ServiceI} from "../../services/interfaces";
 import accountService from "../../services/accountService";
+import serviceService from "../../services/serviceService";
 
 
 interface BookingStateI {
@@ -26,17 +27,22 @@ export const useBookingStore = defineStore('user', {
     },
     actions: {
         async loadStore(account_id: string){
-            const {
-                data: {
-                    account,
-                    services,
+            const [
+                {
+                    data: account
+                },
+                {
+                    data: services,
                 }
-            } = await accountService.get.getInfo(account_id);
+            ] = await Promise.all([accountService.get.show(account_id), serviceService.get.index(account_id)]);
             this.account = account;
             this.services = services;
         },
         async selectService(service: ServiceI){
-
+            const {
+                data: availability
+            } = await accountService.get.getAvailability(this.account.uuid);
+            this.availability = availability;
         }
 
     },

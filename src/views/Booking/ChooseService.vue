@@ -7,7 +7,7 @@
             <div v-for="service in bookingStore.getServices"
                  @click="selectService(service)"
                  class="border rounded-md border-gray-250 w-full px-4 py-3 bg-white flex items-center gap-4"
-                 :class="{'border-blue-400 text-blue-500 bg-blue-100': service.uid === state.selectedService?.uid}">
+                 :class="{'border-blue-400 text-blue-500 bg-blue-100': service.uuid === state.selectedService?.uuid}">
                 <CalendarIcon class="w-8"/>
                 <div class="">
                     {{service.name}}
@@ -44,7 +44,7 @@ const state = reactive({
 })
 
 const selectService = (service: ServiceI)=>{
-    if(state.selectedService?.uid === service.uid){
+    if(state.selectedService?.uuid === service.uuid){
         state.selectedService = null;
         return;
     }
