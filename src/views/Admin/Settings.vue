@@ -63,7 +63,43 @@
                 </div>
             </div>
         </div>
-
+        <div class="mt-4 flex w-full justify-between">
+            <button class="secondary-button" @click="state.services =  { ...state.original_services}">Отказ</button>
+            <button class="primary-button" @click="submitDays">Запази</button>
+        </div>
+    </div>
+    <div class="p-4 mt-4 relative border-gray-200 border rounded-lg max-w-screen-sm">
+        <div class="font-bold mb-1">Обедна почивка</div>
+        <div class="h-px bg-gray-200"></div>
+        <div class="flex flex-col mt-2 gap-2">
+            <div class="grid grid-cols-4 gap-2">
+                <div class="col-span-2">Ден</div>
+                <div class="">Начало</div>
+                <div class="">Край</div>
+            </div>
+            <div v-for="day in state.rest" class="flex items-center w-full gap-2">
+                <div class="w-1/2 flex gap-2 items-center">
+                    <BasicToggle v-model:enabled="day.enabled"/>
+                    <div class="">{{day.title}}</div>
+                </div>
+                <div class="w-1/4">
+                    <input :disabled="!day.enabled"
+                           class="tail-input w-full disabled:opacity-60"
+                           v-model="day.start"
+                           type="text">
+                </div>
+                <div class="w-1/4">
+                    <input :disabled="!day.enabled"
+                           class="tail-input w-full disabled:opacity-60"
+                           v-model="day.end"
+                           type="text">
+                </div>
+            </div>
+        </div>
+        <div class="mt-4 flex w-full justify-between">
+            <button class="secondary-button" @click="state.services =  { ...state.original_services}">Отказ</button>
+            <button class="primary-button" @click="submitRest">Запази</button>
+        </div>
     </div>
 </div>
 </template>
@@ -131,6 +167,50 @@ const state = reactive({
             start: '8:00',
             end: '12:00',
         },
+    ],
+    rest: [
+        {
+            title: 'Понеделник',
+            enabled: false,
+            start: '12:00',
+            end: '13:00',
+        },
+        {
+            title: 'Вторник',
+            enabled: true,
+            start: '12:00',
+            end: '13:00',
+        },
+        {
+            title: 'Сряда',
+            enabled: true,
+            start: '12:00',
+            end: '13:00',
+        },
+        {
+            title: 'Четвътък',
+            enabled: true,
+            start: '12:00',
+            end: '13:00',
+        },
+        {
+            title: 'Петък',
+            enabled: true,
+            start: '12:00',
+            end: '13:00',
+        },
+        {
+            title: 'Събота',
+            enabled: false,
+            start: '11:00',
+            end: '12:00',
+        },
+        {
+            title: 'Неделя',
+            enabled: false,
+            start: '12:00',
+            end: '12:00',
+        },
     ]
 });
 
@@ -143,6 +223,21 @@ const submit = ()=>{
     Toast.fire({
         icon: "success",
         title: 'Успешно запазихте услугите'
+    })
+
+}
+
+const submitDays = ()=>{
+    Toast.fire({
+        icon: "success",
+        title: 'Успешно запазихте работното време'
+    })
+
+}
+const submitRest = ()=>{
+    Toast.fire({
+        icon: "success",
+        title: 'Успешно запазихте обедните почивки'
     })
 
 }

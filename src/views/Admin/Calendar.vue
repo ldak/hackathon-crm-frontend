@@ -50,4 +50,11 @@ onMounted(()=>{
 .fc-event-title {
     text-wrap: wrap;
 }
+
+.fc .fc-button-primary{
+    background-color: rgb(37 99 235 ) !important;
+}
+.fc-day-today {
+    background-color: rgb(191 219 254) !important;
+}
 </style>
