@@ -14,7 +14,9 @@
             </div>
 
         </div>
-        <transition name="fade" mode="out-in">
+         <transition enter-active-class="slide-in-bottom"
+                    leave-active-class="slide-out-bottom"
+                    mode="out-in">
             <div v-if="state.name && ((state.phone.startsWith('0') && state.phone.length >= 10) || (state.phone.startsWith('+359') && state.phone.length >= 13)) "
                  class="pt-3 px-6 pb-5 w-full border-t border-gray-250 absolute bottom-0 h-min flex gap-4 items-center justify-around">
                 <button @click="state.name = null; state.phone = null" class="secondary-button h-11 flex-1">

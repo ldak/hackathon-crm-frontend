@@ -6,7 +6,9 @@
             <div class="text-sm text-center">Въведете еднократния код изпратен на: {{bookingStore.getCustomer.phone}}</div>
             <input class="tail-input w-full" v-model="state.otp" type="number">
         </div>
-        <transition name="fade" mode="out-in">
+         <transition enter-active-class="slide-in-bottom"
+                    leave-active-class="slide-out-bottom"
+                    mode="out-in">
             <div v-if="state.otp"
                  class="pt-3 px-6 pb-5 w-full border-t border-gray-250 absolute bottom-0 h-min flex gap-4 items-center justify-around">
                 <button @click="state.otp= null" class="secondary-button h-11 flex-1">
