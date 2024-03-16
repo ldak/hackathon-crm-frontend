@@ -17,10 +17,10 @@
     </div>
     <div class="p-4 border-gray-200 border rounded-lg flex flex-col gap-4 max-w-screen-sm w-full">
         <div class="flex gap-4 items-center">
-            <BellIcon class="w-6"/>
+            <ClockIcon class="w-6"/>
             <div class="">Напомняне за запазен час</div>
             <div class="flex-1"></div>
-            <BasicToggle v-model:enabled="state.app_conf.enabled"/>
+            <BasicToggle v-model:enabled="state.app_reminder.enabled"/>
         </div>
         <textarea v-model="state.app_reminder.message" rows="5" class="w-full tail-input"/>
         <div class="flex justify-end">
@@ -32,7 +32,7 @@
     </div>
     <div class="p-4 border-gray-200 border rounded-lg flex flex-col gap-4 max-w-screen-sm w-full">
         <div class="flex gap-4 items-center">
-            <BellIcon class="w-6"/>
+            <StarIcon class="w-6"/>
             <div class="">Follow Up</div>
             <div class="flex-1"></div>
             <BasicToggle v-model:enabled="state.follow_up.enabled"/>
@@ -45,12 +45,28 @@
             </button>
         </div>
     </div>
+    <div class="p-4 border-gray-200 border rounded-lg flex flex-col gap-4 max-w-screen-sm w-full">
+        <div class="flex gap-4 items-center">
+            <StarIcon class="w-6"/>
+            <div class="">Закъснение на часовете</div>
+            <div class="flex-1"></div>
+<!--            <BasicToggle v-model:enabled="state.follow_up.enabled"/>-->
+        </div>
+        <div class=""></div>
+        <textarea v-model="state.delay.message" rows="5" class="w-full tail-input"/>
+        <div class="flex justify-end">
+            <button class="primary-button"
+                    @click="send(state.delay)">
+                Изпрати
+            </button>
+        </div>
+    </div>
 </div>
 </template>
 
 <script setup lang="ts">
-import {reactive} from "vue";
-import {BellIcon} from "@heroicons/vue/24/outline";
+import {computed, reactive} from "vue";
+import {BellIcon, ClockIcon, StarIcon} from "@heroicons/vue/24/outline";
 import BasicToggle from "../../components/Forms/BasicToggle.vue";
 import {Toast} from "../../swal";
 
@@ -67,10 +83,18 @@ const state = reactive({
         enabled: true,
         message: 'Здравей, {{customer.first_name}}. Доволни ли сте от посещението си при нас?'
     },
+    delay:{
+        enabled: true,
+        message: 'Здравей, {{customer.first_name}}. Доволни ли сте от посещението си при нас?'
+    },
 })
 
-const submit = (automation) =>{
+const submit = (automation) => {
     Toast.fire({icon: 'success', title: 'Успешно запазена автоматизация'});
+}
+
+const send = (automation) => {
+    Toast.fire({icon: 'success', title: 'Успешно изпратено съобщение'});
 }
 
 
