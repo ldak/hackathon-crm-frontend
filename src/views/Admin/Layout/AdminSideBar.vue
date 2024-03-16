@@ -50,14 +50,14 @@
 
 <script setup>
 import {
-    BuildingOfficeIcon, BuildingStorefrontIcon,
+    BuildingOfficeIcon, BuildingStorefrontIcon, CalendarIcon,
     Cog6ToothIcon, CubeIcon, PuzzlePieceIcon, ShoppingCartIcon, TagIcon,
     UsersIcon,
 } from '@heroicons/vue/24/outline'
 import {computed} from "vue";
 
 const navigation = computed(()=> [
-    // {name: 'Поръчки', to: {name: "admin.orders"}, icon: ShoppingCartIcon},
+    {name: 'Календар', to: {name: "admin.calendar"}, icon: CalendarIcon},
     // {name: 'Потребители', to: {name: "admin.users"}, icon: UsersIcon},
     // {name: 'Производители',  to: {name: "admin.producers"}, icon: BuildingOfficeIcon},
     // {name: 'Продукти',  to: {name: "admin.products"}, icon: CubeIcon},

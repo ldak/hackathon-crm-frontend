@@ -61,7 +61,7 @@ const submit = async ({email, password}) => {
     }
 
     state.loading = false;
-    await router.push({name: "admin.users"})
+    await router.push({name: "admin.calendar"})
 
 }
 

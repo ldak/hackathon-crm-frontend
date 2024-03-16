@@ -46,8 +46,11 @@ export default [
         path: '/admin',
         component: ()=> import('../views/Admin/Layout/AdminLayout.vue'),
         children: [
-            // Users
-
+            {
+                path: 'calendar',
+                name: 'admin.calendar',
+                component: ()=> import('../views/Admin/Calendar.vue'),
+            },
         ]
     }
 ]
