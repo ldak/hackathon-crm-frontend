@@ -1,21 +1,78 @@
 
 <template>
 <div class="w-full">
-    Настройки
-    <div class=""></div>
-    <div class="p-4 relative border-gray-400 ">
+
+    <div class="text-lg font-bold mb-4">Настройки</div>
+    <div class="p-4 relative border-gray-200 border rounded-md">
         <div class="font-bold mb-1">Услуги</div>
         <div class="text-sm mb-2">Услугите, които добавите тук, ще могат да се запазват през онлайн инструмента за резервация.</div>
-        <div class="absolute left-0 right-0 h-px bg-gray-400"></div>
-        <div class="mt-4 flex">
-            <div class=""></div>
+        <div class="absolute left-0 right-0 h-px bg-gray-200"></div>
+        <div class="mt-4 flex gap-2">
+            <div class="w-1/2">Услуги</div>
+            <div class="w-1/4">Цена</div>
+            <div class="w-1/4">Времетраене</div>
+        </div>
+        <transition-group name="fade" >
+            <div v-for="service in state.services"
+                 :key="service.uuid"
+                 class="flex items-center gap-2">
+                <input v-model="service.name" class="w-3/4 tail-input">
+                <div class="w-1/4 flex-center gap-2">
+                    <div class="relative flex-center">
+                        <input v-model="service.duration" type="number" class="w-full tail-input pr-10">
+                        <div class="absolute right-2 bg-gray-500">часа</div>
+                    </div>
+                    <button @click="state.services = state.services.filter((s) => s.uuid!=service.uuid);">
+                        <TrashIcon class="w-4 text-red-600"/>
+                    </button>
+                </div>
+            </div>
+        </transition-group>
+        <button class="soft-button" @click="add" >Добави услуга +</button>
+        <div class="mt-2 flex w-full justify-between">
+            <button class="secondary-button" @click="state.services =  { ...state.original_services}">Отказ</button>
+            <button class="primary-button" @click="submit">Запази</button>
         </div>
     </div>
 </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
+import {TrashIcon} from '@heroicons/vue/24/outline'
+import {onMounted, reactive} from "vue";
+import {Toast} from "../../swal/index.js";
 
+const state = reactive({
+    original_services: null,
+    services: [
+        {
+            uuid: 213,
+            name: "Купи котка",
+            duration: 12
+        },
+        {
+            uuid: 213,
+            name: "Купи котка",
+            duration: 12
+        }
+    ]
+});
+
+const add = ()=>{
+    state.services.push({name: '', uuid: Math.random() * 100, duration: 2 })
+}
+
+const submit = ()=>{
+    Toast.fire({
+        icon: "success",
+        title: 'Успешно запазихте услугите'
+    })
+
+}
+
+onMounted(()=>{
+    state.original_services = {...state.services};
+})
 </script>
 
 <style scoped>
