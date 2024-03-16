@@ -1,7 +1,7 @@
 <template>
     <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-blue-600 px-6 pb-4">
         <div class="flex h-16 shrink-0 items-center">
-            <img class="h-8 w-auto" src="/logo-hac-white.png"
+            <img class="h-8 w-auto" src="/logo.png"
                  alt="Your Company"/>
         </div>
         <nav class="flex flex-1 flex-col">
