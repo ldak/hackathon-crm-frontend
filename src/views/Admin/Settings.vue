@@ -35,27 +35,102 @@
             <button class="primary-button" @click="submit">Запази</button>
         </div>
     </div>
+    <div class="p-4 mt-4 relative border-gray-200 border rounded-lg max-w-screen-sm">
+        <div class="font-bold mb-1">Работно време</div>
+        <div class="h-px bg-gray-200"></div>
+        <div class="flex flex-col mt-2 gap-2">
+            <div class="grid grid-cols-4 gap-2">
+                <div class="col-span-2">Ден</div>
+                <div class="">Начало</div>
+                <div class="">Край</div>
+            </div>
+            <div v-for="day in state.days" class="flex items-center w-full gap-2">
+                <div class="w-1/2 flex gap-2 items-center">
+                    <BasicToggle v-model:enabled="day.enabled"/>
+                    <div class="">{{day.title}}</div>
+                </div>
+                <div class="w-1/4">
+                    <input :disabled="!day.enabled"
+                           class="tail-input w-full disabled:opacity-60"
+                           v-model="day.start"
+                           type="text">
+                </div>
+                <div class="w-1/4">
+                    <input :disabled="!day.enabled"
+                           class="tail-input w-full disabled:opacity-60"
+                           v-model="day.end"
+                           type="text">
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
 </template>
 
 <script setup>
 import {TrashIcon} from '@heroicons/vue/24/outline'
-import {onMounted, reactive} from "vue";
+import {computed, onMounted, reactive} from "vue";
 import {Toast} from "../../swal/index.js";
+import BasicToggle from "../../components/Forms/BasicToggle.vue";
 
 const state = reactive({
     original_services: null,
     services: [
         {
             uuid: 213,
-            name: "Купи котка",
-            duration: 12
+            name: "Купи куче",
+            duration: 1
         },
         {
             uuid: 214,
             name: "Купи котка",
             duration: 12
         }
+    ],
+    days: [
+        {
+            title: 'Понеделник',
+            enabled: false,
+            start: '8:00',
+            end: '17:00',
+        },
+        {
+            title: 'Вторник',
+            enabled: true,
+            start: '8:00',
+            end: '17:00',
+        },
+        {
+            title: 'Сряда',
+            enabled: true,
+            start: '8:00',
+            end: '17:00',
+        },
+        {
+            title: 'Четвътък',
+            enabled: true,
+            start: '8:00',
+            end: '17:00',
+        },
+        {
+            title: 'Петък',
+            enabled: true,
+            start: '8:00',
+            end: '17:00',
+        },
+        {
+            title: 'Събота',
+            enabled: true,
+            start: '8:00',
+            end: '12:00',
+        },
+        {
+            title: 'Неделя',
+            enabled: false,
+            start: '8:00',
+            end: '12:00',
+        },
     ]
 });
 
@@ -71,6 +146,15 @@ const submit = ()=>{
     })
 
 }
+
+const timesOptions = computed(()=>{
+    let times = [];
+    for (let hour = 1; hour <= 23; hour++) {
+        let time = `${hour}:00`;
+        times.push(time);
+    }
+    return times;
+})
 
 onMounted(()=>{
     state.original_services = {...state.services};
