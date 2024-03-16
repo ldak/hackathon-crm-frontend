@@ -1,17 +1,17 @@
 export interface UserI {
-    uuid: number,
+    uuid: string,
     account_id: number,
     name: string,
     email: string,
 }
 
 export interface AccountI {
-    uuid: number,
+    uuid: string,
     name: string,
 }
 
 export interface ServiceI {
-    uuid: number,
+    uuid: string,
     name: string,
     duration: number,
 }
@@ -22,4 +22,10 @@ interface IntervalI{
 }
 export interface AvailabilityI {
     [key: string]: IntervalI[];
+}
+
+export interface CustomerI{
+    uuid: string,
+    name: string,
+    phone: string,
 }

@@ -28,14 +28,15 @@
     </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 
 import {object, string} from "yup";
 import {reactive} from "vue";
 import {useBookingStore} from "../../store/booking";
+import {useRouter} from "vue-router";
 
 const bookingStore = useBookingStore();
-
+const router = useRouter();
 const state = reactive({
     name: '',
     phone: '',
@@ -43,7 +44,7 @@ const state = reactive({
 
 const submit = ()=>{
     bookingStore.setCustomer(state.name, state.phone);
-
+    router.push({name: 'booking.otp'});
 }
 
 </script>

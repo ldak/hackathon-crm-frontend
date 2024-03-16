@@ -41,9 +41,11 @@ const bookingStore = useBookingStore();
 const state = reactive({
     enterClass: 'slide-in-right',
     leaveClass: 'slide-out-left',
+    goingBack: false,
 })
 
 const goBack = async ()=>{
+    state.goingBack = true;
     state.enterClass = 'slide-in-left';
     state.leaveClass = 'slide-out-right';
     await nextTick();
@@ -51,6 +53,7 @@ const goBack = async ()=>{
     await new Promise(resolve => setTimeout(resolve, 500));
     state.enterClass = 'slide-in-right';
     state.leaveClass = 'slide-out-left';
+    state.goingBack = false;
 
 }
 

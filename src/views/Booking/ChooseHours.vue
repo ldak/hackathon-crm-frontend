@@ -69,8 +69,10 @@ import * as moment from "moment/moment";
 import 'moment/locale/bg'
 import {ChevronLeftIcon, ChevronRightIcon} from "@heroicons/vue/20/solid";
 import {useBookingStore} from "../../store/booking";
+import {useRouter} from "vue-router";
 
 const bookingStore = useBookingStore();
+const router = useRouter()
 
 const state = reactive({
     baseDate: new Date(),
@@ -102,7 +104,7 @@ const moveForward = ()=>{
 
 const submit = ()=>{
     bookingStore.setHour(state.selectedHour);
-    router.push({name: ''})
+    router.push({name: 'booking.customer'});
 }
 
 onBeforeMount(()=>{

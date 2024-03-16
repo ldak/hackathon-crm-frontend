@@ -1,7 +1,7 @@
 import {defineStore} from "pinia";
 import userService from "../../services/userService";
 import client from "../../client/index";
-import {AccountI, AvailabilityI, ServiceI} from "../../services/interfaces";
+import {AccountI, AvailabilityI, CustomerI, ServiceI} from "../../services/interfaces";
 import accountService from "../../services/accountService";
 import serviceService from "../../services/serviceService";
 import appointmentService from "../../services/appointmentService";
@@ -13,7 +13,7 @@ interface BookingStateI {
     selectedService: ServiceI,
     availability: AvailabilityI,
     selectedHour: string,
-    customer: object,
+    customer: CustomerI,
 }
 
 export const useBookingStore = defineStore('user', {
@@ -30,6 +30,7 @@ export const useBookingStore = defineStore('user', {
         getServices: (state :BookingStateI):ServiceI[] => state.services,
         getSelectedService: (state:BookingStateI):ServiceI => state.selectedService,
         getAvailability: (state:BookingStateI):AvailabilityI => state.availability,
+        getCustomer: (state): CustomerI => state.customer,
     },
     actions: {
         async loadStore(account_id: string){
@@ -58,6 +59,14 @@ export const useBookingStore = defineStore('user', {
                 data: customer,
             } = await appointmentService.get.getCustomer(name, phone);
             this.customer = customer;
+        },
+        async bookAppointment(otp: string) {
+            const data = await appointmentService.post.store(
+                this.selectedHour,
+                this.selectedService.uuid,
+                this.customer.uuid,
+                otp
+            );
         }
 
     },
