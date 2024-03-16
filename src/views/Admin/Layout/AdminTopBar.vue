@@ -9,15 +9,11 @@
         <div class="h-6 w-px bg-gray-900/10 lg:hidden" aria-hidden="true"/>
 
         <div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
-            <form class="relative invisible flex flex-1" action="#" method="GET">
-                <label for="search-field" class="sr-only">Search</label>
-                <MagnifyingGlassIcon
-                        class="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-gray-400"
-                        aria-hidden="true"/>
-                <input id="search-field"
-                       class="block h-full w-full border-0 py-0 pl-8 pr-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm"
-                       placeholder="Search..." type="search" name="search"/>
-            </form>
+            <div class="flex-1 font-bold text-lg flex items-center">
+                <div class="">
+                    {{route.meta.title}}
+                </div>
+            </div>
             <div class="flex items-center gap-x-4 lg:gap-x-6">
                 <button type="button" class="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
                     <span class="sr-only">View notifications</span>
@@ -73,10 +69,11 @@ import {ChevronDownIcon, MagnifyingGlassIcon} from "@heroicons/vue/20/solid";
 import {Menu, MenuButton, MenuItem, MenuItems} from "@headlessui/vue";
 import {Bars3Icon, BellIcon} from "@heroicons/vue/24/outline";
 import {useUserStore} from "../../../store/user/index.ts";
-import {useRouter} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 
 const emits = defineEmits(['openSideBar'])
 const router = useRouter();
+const route = useRoute();
 
 const userStore = useUserStore();
 

@@ -1,26 +1,24 @@
 
 <template>
 <div class="w-full">
-
-    <div class="text-lg font-bold mb-4">Настройки</div>
-    <div class="p-4 relative border-gray-200 border rounded-lg max-w-screen-md">
+    <div class="p-4 relative border-gray-200 border rounded-lg max-w-screen-sm">
         <div class="font-bold mb-1">Услуги</div>
         <div class="text-sm mb-2">Услугите, които добавите тук, ще могат да се запазват през онлайн инструмента за резервация.</div>
         <div class="h-px bg-gray-200"></div>
 
         <div class="flex flex-col gap-2 items-start mt-4 w-full">
             <div class="flex gap-4 w-full">
-                <div class="w-3/4">Услуги</div>
-                <div class="w-1/4">Времетраене</div>
+                <div class="w-10/12">Услуги</div>
+                <div class="w-2/12">Времетраене</div>
             </div>
             <transition-group name="fade">
                 <div v-for="service in state.services"
                      :key="service.uuid"
                      class="flex items-center gap-2 w-full">
-                    <input v-model="service.name" class="w-3/4 tail-input">
-                    <div class="w-1/4 flex-center gap-2">
+                    <input v-model="service.name" class="w-10/12 tail-input">
+                    <div class="w-2/12 flex-center gap-2">
                         <div class="relative flex-center flex-1">
-                            <input v-model="service.duration" type="number" class="w-full tail-input pr-10">
+                            <input v-model="service.duration" class="w-full tail-input pr-10">
                             <div class="absolute right-2 text-gray-500">часа</div>
                         </div>
                         <button @click="state.services = state.services.filter((s) => s.uuid!=service.uuid);">
@@ -54,7 +52,7 @@ const state = reactive({
             duration: 12
         },
         {
-            uuid: 213,
+            uuid: 214,
             name: "Купи котка",
             duration: 12
         }
@@ -62,10 +60,11 @@ const state = reactive({
 });
 
 const add = ()=>{
-    state.services.push({name: '', uuid: Math.random() * 100, duration: 2 })
+    state.services.push({name: 'Услуга', uuid: Math.random() * 100, duration: 2 })
 }
 
 const submit = ()=>{
+    state.original_services = {...state.services};
     Toast.fire({
         icon: "success",
         title: 'Успешно запазихте услугите'

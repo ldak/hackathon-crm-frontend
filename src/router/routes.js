@@ -50,17 +50,20 @@ export default [
                 path: 'calendar',
                 name: 'admin.calendar',
                 component: ()=> import('../views/Admin/Calendar.vue'),
-            },
-            {
-                path: 'settings',
-                name: 'admin.settings',
-                component: () => import('../views/Admin/Settings.vue')
+                meta: {title: 'Календар'}
             },
             {
                 path: 'automations',
                 name: 'admin.automations',
-                component: () => import('../views/Admin/Automations.vue')
-            }
+                component: () => import('../views/Admin/Automations.vue'),
+                meta: {title: 'Автоматизации'}
+            },
+            {
+                path: 'settings',
+                name: 'admin.settings',
+                component: () => import('../views/Admin/Settings.vue'),
+                meta: {title: 'Настройки'}
+            },
         ]
     }
 ]
