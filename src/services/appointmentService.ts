@@ -2,6 +2,9 @@ import client from "../client";
 
 export default {
     get: {
+        getAppointments(start_time: string, end_time: string){
+            return client.get('appointments/get?start_date=' + start_time + '&end_date=' + end_time)
+        }
     },
     post: {
         store(start_time: string, service_uuid: string, customer_uuid: string, otp: string){
