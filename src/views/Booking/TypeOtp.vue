@@ -1,10 +1,10 @@
 
 <template>
     <div class="h-full w-full relative">
-        <div class="flex flex-col p-4 pb-8 items-center justify-center gap-4 h-full w-full">
-            <div class="font-bold">Потвърждение</div>
-            <div class="text-sm">Въведете еднократния код изпратен на: {{bookingStore.getCustomer.phone}}</div>
-            <input class="tail-input" v-model="state.otp" type="number">
+        <div class="flex flex-col p-4 pt-20 items-center gap-4 h-full w-full">
+            <div class="font-bold text-xl">Потвърждение</div>
+            <div class="text-sm text-center">Въведете еднократния код изпратен на: {{bookingStore.getCustomer.phone}}</div>
+            <input class="tail-input w-full" v-model="state.otp" type="number">
         </div>
         <transition name="fade" mode="out-in">
             <div v-if="state.otp"
