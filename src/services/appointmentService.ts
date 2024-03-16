@@ -12,7 +12,7 @@ export default {
                 date: start_time,
                 service_uuid,
                 client_uuid: customer_uuid,
-                otp
+                otp_code: otp
             })
         },
         getCustomer(name: string, phone: string){

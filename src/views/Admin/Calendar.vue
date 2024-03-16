@@ -30,7 +30,6 @@ const state = reactive({
         events: [],
         datesSet: async (arg) => {
             const newEvents = await appointmentService.get.getAppointments(arg.start.toJSON(), arg.end.toJSON());
-            console.log(newEvents.data);
             state.calendarOptions.events = newEvents.data.map((event) => {
                 return {
                     title: event.client.name + " - " + event.service.name,

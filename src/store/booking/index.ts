@@ -50,9 +50,12 @@ export const useBookingStore = defineStore('user', {
                 data: availability
             } = await accountService.get.getAvailability(this.account.uuid);
             this.availability = availability;
+            this.selectedService = service;
         },
         setHour(hour: string){
-            this.selectedHour = hour;
+            const timestamp = (new Date(hour)).toJSON();
+            console.log(timestamp);
+            this.selectedHour = timestamp;
         },
         async setCustomer(name: string, phone: string){
             const {
@@ -65,7 +68,7 @@ export const useBookingStore = defineStore('user', {
                 this.selectedHour,
                 this.selectedService.uuid,
                 this.customer.uuid,
-                otp
+                String(otp)
             );
         }
 
