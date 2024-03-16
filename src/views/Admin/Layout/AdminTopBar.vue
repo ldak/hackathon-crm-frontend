@@ -32,7 +32,7 @@
                     <MenuButton class="-m-1.5 flex items-center p-1.5">
                         <span class="sr-only">Open user menu</span>
 <!--                        Avatar Icon-->
-                        <div class="h-8 w-8 rounded-full bg-indigo-600 flex-center">
+                        <div class="h-8 w-8 rounded-full bg-blue-600 flex-center">
                             <div class="font-bold text-white text-xs">
                                 {{userStore.getInitials}}
                             </div>
