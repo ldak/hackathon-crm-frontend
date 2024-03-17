@@ -1,6 +1,6 @@
 export interface UserI {
     uuid: string,
-    account_id: number,
+    account_uuid: string,
     name: string,
     email: string,
 }

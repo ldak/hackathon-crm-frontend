@@ -13,13 +13,13 @@
             </div>
             <transition-group name="fade">
                 <div v-for="service in state.services"
-                     :key="service.uuid"
+                     :key="service.id"
                      class="flex items-center gap-2 w-full">
                     <input v-model="service.name" class="w-10/12 tail-input">
                     <div class="w-2/12 flex-center gap-2">
                         <div class="relative flex-center flex-1">
                             <input v-model="service.duration" class="w-full tail-input pr-10">
-                            <div class="absolute right-2 text-gray-500">часа</div>
+                            <div class="absolute right-2 text-gray-500">мин.</div>
                         </div>
                         <button @click="state.services = state.services.filter((s) => s.uuid!=service.uuid);">
                             <TrashIcon class="w-4 text-red-600"/>
@@ -109,32 +109,13 @@ import {TrashIcon} from '@heroicons/vue/24/outline'
 import {computed, onMounted, reactive} from "vue";
 import {Toast} from "../../swal/index.js";
 import BasicToggle from "../../components/Forms/BasicToggle.vue";
+import serviceService from "../../services/serviceService";
+import {useUserStore} from "../../store/user/index";
 
+const userStore = useUserStore();
 const state = reactive({
     original_services: null,
-    services: [
-        {
-            uuid: 213,
-            name: "Смяна на мало",
-            duration: 1
-        },
-        {
-            uuid: 214,
-            name: "Ремонт на спирачна система",
-            duration: 3
-        },
-        {
-            uuid: 215,
-            name: "Смяна на гуми",
-            duration: 1
-        },
-        {
-            uuid: 216,
-            name: "Компютърна диагностика",
-            duration: 1
-        },
-
-    ],
+    services: null,
     days: [
         {
             title: 'Понеделник',
@@ -226,11 +207,22 @@ const state = reactive({
 });
 
 const add = ()=>{
-    state.services.push({name: 'Услуга', uuid: Math.random() * 100, duration: 2 })
+    state.services.push({name: 'Услуга', uuid: '', id: Math.random() * 100, duration: 2 })
 }
 
-const submit = ()=>{
+const submit = async ()=>{
     state.original_services = {...state.services};
+    try {
+        await serviceService.patch.save(userStore.getUser.account_uuid,
+            state.services.map((service)=>{
+                return {
+                    uuid: service.uuid,
+                    name: service.name,
+                    duration: service.duration,
+                }
+            })
+        );
+    }catch (e){}
     Toast.fire({
         icon: "success",
         title: 'Успешно запазихте услугите'
@@ -262,7 +254,14 @@ const timesOptions = computed(()=>{
     return times;
 })
 
-onMounted(()=>{
+onMounted(async ()=>{
+    const {
+        data: services,
+    } = await serviceService.get.index(userStore.getUser.account_uuid);
+    state.services = services.map((service)=>{
+        service.id = service.uuid;
+        return service;
+    })
     state.original_services = {...state.services};
 })
 </script>

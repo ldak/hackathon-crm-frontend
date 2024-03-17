@@ -1,8 +1,9 @@
 <template>
     <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-blue-600 px-6 pb-4">
-        <div class="flex h-16 shrink-0 items-center">
+        <div class="flex h-16 shrink-0 items-center gap-2">
             <img class="h-8 w-auto" src="/logo.png"
                  alt="Your Company"/>
+            <div class="text-white font-bold text-lg">AppointMate</div>
         </div>
         <nav class="flex flex-1 flex-col">
             <ul role="list" class="flex flex-1 flex-col gap-y-7">
