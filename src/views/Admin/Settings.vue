@@ -115,49 +115,60 @@ const state = reactive({
     services: [
         {
             uuid: 213,
-            name: "Купи куче",
+            name: "Смяна на мало",
             duration: 1
         },
         {
             uuid: 214,
-            name: "Купи котка",
-            duration: 12
-        }
+            name: "Ремонт на спирачна система",
+            duration: 3
+        },
+        {
+            uuid: 215,
+            name: "Смяна на гуми",
+            duration: 1
+        },
+        {
+            uuid: 216,
+            name: "Компютърна диагностика",
+            duration: 1
+        },
+
     ],
     days: [
         {
             title: 'Понеделник',
-            enabled: false,
-            start: '8:00',
-            end: '17:00',
+            enabled: true,
+            start: '10:00',
+            end: '14:00',
         },
         {
             title: 'Вторник',
             enabled: true,
-            start: '8:00',
-            end: '17:00',
+            start: '10:00',
+            end: '14:00',
         },
         {
             title: 'Сряда',
             enabled: true,
-            start: '8:00',
-            end: '17:00',
+            start: '10:00',
+            end: '14:00',
         },
         {
             title: 'Четвътък',
             enabled: true,
-            start: '8:00',
-            end: '17:00',
+            start: '10:00',
+            end: '14:00',
         },
         {
             title: 'Петък',
             enabled: true,
-            start: '8:00',
-            end: '17:00',
+           start: '10:00',
+            end: '14:00',
         },
         {
             title: 'Събота',
-            enabled: true,
+            enabled: false,
             start: '8:00',
             end: '12:00',
         },
@@ -177,25 +188,25 @@ const state = reactive({
         },
         {
             title: 'Вторник',
-            enabled: true,
+            enabled: false,
             start: '12:00',
             end: '13:00',
         },
         {
             title: 'Сряда',
-            enabled: true,
+            enabled: false,
             start: '12:00',
             end: '13:00',
         },
         {
             title: 'Четвътък',
-            enabled: true,
+            enabled: false,
             start: '12:00',
             end: '13:00',
         },
         {
             title: 'Петък',
-            enabled: true,
+            enabled: false,
             start: '12:00',
             end: '13:00',
         },
