@@ -9,6 +9,9 @@ import { Skeletor } from 'vue-skeletor';
 import * as Yup from 'yup';
 import { setupCalendar, Calendar, DatePicker } from 'v-calendar';
 import 'v-calendar/style.css';
+import * as _moment from "moment/moment";
+const moment = _moment;
+
 
 Yup.setLocale({
     mixed: {
@@ -22,7 +25,8 @@ const pinia = createPinia()
 const app = createApp(App)
 
 app.use(setupCalendar, {})
-app.use(router)
+app.use(router);
+app.use(moment);
 app.use(pinia);
 
 

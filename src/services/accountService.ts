@@ -2,7 +2,7 @@ import {AxiosResponse} from "axios";
 import {AccountI, AvailabilityI} from "./interfaces";
 import client from "../client";
 import * as _moment from "moment/moment";
-const moment = _moment
+const moment = _moment;
 
 
 export default {
