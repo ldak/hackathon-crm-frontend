@@ -1,7 +1,8 @@
-import HelloWorld from "../components/HelloWorld.vue";
-
 export default [
-
+    {
+        path: '/',
+        redirect: '/login'
+    },
     {
         path: '/login',
         name: 'login',
