@@ -1,6 +1,5 @@
 import client from "../client";
-import * as _moment from "moment/moment";
-const moment = _moment;
+import moment from 'moment';
 
 
 export default {

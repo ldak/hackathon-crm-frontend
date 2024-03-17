@@ -9,8 +9,7 @@ import { Skeletor } from 'vue-skeletor';
 import * as Yup from 'yup';
 import { setupCalendar, Calendar, DatePicker } from 'v-calendar';
 import 'v-calendar/style.css';
-import * as _moment from "moment/moment";
-const moment = _moment;
+import moment from 'moment';
 
 
 Yup.setLocale({
