@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="flex transition-all duration-500 " :style="transitionComputed">
-                <button :disabled="!bookingStore.getAvailability[moment(state.baseDate).format('YYYY-MM-DD')]"
+                <button :disabled="!bookingStore.getAvailability[moment(state.baseDate).format('YYYY-MM-DD')] || moment(state.baseDate).weekday() === 5 ||  moment(state.baseDate).weekday() === 6"
                         class="flex flex-col gap-2 items-center cursor-pointer disabled:opacity-70"
                         style="min-width: 20%"
                         @click="state.selectedDate = moment(state.baseDate).toDate()">
@@ -36,7 +36,7 @@
                     </span>
                 </button>
                 <button v-for="i in 30"
-                        :disabled="!bookingStore.getAvailability[moment(state.baseDate).add(i, 'days').format('YYYY-MM-DD')]"
+                        :disabled="!bookingStore.getAvailability[moment(state.baseDate).add(i, 'days').format('YYYY-MM-DD')]  || moment(state.baseDate).add(i, 'days').weekday() === 5 ||  moment(state.baseDate).add(i, 'days').weekday() === 6"
                         class="flex flex-col gap-2 items-center cursor-pointer disabled:opacity-70"
                         style="min-width: 20%"
                         @click="state.selectedDate = moment(state.baseDate).add(i, 'days').toDate()">
