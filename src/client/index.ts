@@ -1,6 +1,6 @@
 import axios, {AxiosInstance} from "axios";
 
-export const baseUrl :string = 'http://192.168.34.25:8000/'
+export const baseUrl :string = 'https://api.appointmate.me/'
 
 const httpClient :AxiosInstance = axios.create({
     baseURL: baseUrl,
