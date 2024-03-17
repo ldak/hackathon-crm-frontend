@@ -5,7 +5,7 @@
             <div class="font-bold text-xl">Потвърждение</div>
             <div v-if="bookingStore.getCustomer.phone"
                  class="text-sm text-center">Въведете еднократния код изпратен на: {{bookingStore.getCustomer.phone}}</div>
-            <input class="tail-input w-full" v-model="state.otp" type="number">
+            <input class="tail-input w-full" v-model="state.otp">
         </div>
          <transition enter-active-class="slide-in-bottom"
                     leave-active-class="slide-out-bottom"

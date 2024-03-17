@@ -1,11 +1,7 @@
 import HelloWorld from "../components/HelloWorld.vue";
 
 export default [
-    {
-        path: '/',
-        name: 'home',
-        component: HelloWorld
-    },
+
     {
         path: '/login',
         name: 'login',
@@ -65,5 +61,9 @@ export default [
                 meta: {title: 'Настройки'}
             },
         ]
-    }
+    },
+    {
+        path: '/*',
+        redirect: {name: 'login'}
+    },
 ]
