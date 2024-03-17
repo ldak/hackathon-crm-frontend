@@ -1,5 +1,5 @@
 <template>
-<div class="w-full flex flex-col gap-4 items-center">
+<div class="w-full flex flex-col gap-4">
     <div class="p-4 border-gray-200 border rounded-lg flex flex-col gap-4 max-w-screen-sm w-full">
         <div class="flex gap-4 items-center">
             <BellIcon class="w-6"/>
@@ -26,13 +26,13 @@
             <BasicToggle v-model:enabled="state.app_reminder.enabled"/>
         </div>
         <div class="text-sm">
-            Когато тази автоматизация е включена, всеки клиент ще получи напомняне за часа си 1 ден преди него.
+            Когато тази автоматизация е включена, всеки клиент ще получи напомняне за часа си в избран от Вас интервал.
         </div>
         <textarea v-model="state.app_reminder.message" rows="5" class="w-full tail-input"/>
         <div class="flex gap-2 items-center">
             Това съобщение ще се изпрати
-            <div class="relative flex-center flex-1">
-                <input v-model="state.app_reminder.duration" class="w-full tail-input pr-10">
+            <div class="relative flex-center">
+                <input v-model="state.app_reminder.duration" class="max-w-16 tail-input pr-10">
                 <div class="absolute right-2 text-gray-500">часа</div>
             </div>
             преди часа на клиента
@@ -57,8 +57,8 @@
         <textarea v-model="state.follow_up.message" rows="5" class="w-full tail-input"/>
         <div class="flex gap-2 items-center">
             Това съобщение ще се изпрати
-            <div class="relative flex-center flex-1">
-                <input v-model="state.app_conf.duration" class="w-full tail-input pr-10">
+            <div class="relative flex-center">
+                <input v-model="state.app_conf.duration" class="max-w-16 tail-input pr-10">
                 <div class="absolute right-2 text-gray-500">дни</div>
             </div>
             след часа на клиента
@@ -83,8 +83,8 @@
         <textarea v-model="state.canned_service.message" rows="5" class="w-full tail-input"/>
         <div class="flex gap-2 items-center">
             Това съобщение ще се изпрати
-            <div class="relative flex-center flex-1">
-                <input v-model="state.app_reminder.duration" class="w-full tail-input pr-10">
+            <div class="relative flex-center ">
+                <input v-model="state.app_reminder.duration" class="max-w-16 tail-input pr-10">
                 <div class="absolute right-2 text-gray-500">дни</div>
             </div>
             след часа на клиента
@@ -145,12 +145,12 @@ import {Toast} from "../../swal";
 const state = reactive({
     app_conf:{
         enabled: true,
-        message: 'Готово, {{customer.first_name}}! Вашият час при {{account.name}} за {{service}} е потвърдена. Ще се видим на {{appointment.date_formatted}}. '
+        message: 'Готово, {{customer.first_name}}! Вашият час при {{account.name}} за {{service}} е потвърден. Ще се видим на {{appointment.date_formatted}}. ',
         duration: 2
     },
     app_reminder:{
         enabled: false,
-        message: 'Здравей, {{appointment.customer.first_name}}! {{account.name}}  с кратко напомняне за часа Ви утре на {{appointment.date_formatted}}.  Ако имате въпроси или трябва да направите актуализации на срещата си, можете да отговорите на това съобщение. 😊 Очакваме Ви с нетърпение!'
+        message: 'Здравей, {{appointment.customer.first_name}}! {{account.name}}  с кратко напомняне за часа Ви утре на {{appointment.date_formatted}}.  Ако имате въпроси или трябва да направите актуализации на срещата си, можете да отговорите на това съобщение. 😊 Очакваме Ви с нетърпение!',
         duration: 2
     },
     follow_up:{
@@ -170,7 +170,7 @@ const state = reactive({
     },
     campaign:{
         enabled: true,
-        message: 'Здравей, {{customer.first_name}}. Доволни ли сте от посещението си при нас?',
+        message: 'По случай месеца на жената, дамите, възползвали се от нашите услуги получават 10% отстъпка!',
         duration: 2
     },
 })
