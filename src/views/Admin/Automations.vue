@@ -73,7 +73,7 @@
     <div class="p-4 border-gray-200 border rounded-lg flex flex-col gap-4 max-w-screen-sm w-full">
         <div class="flex gap-4 items-center">
             <StarIcon class="w-6"/>
-            <div class="">Покана за последващо съобщение</div>
+            <div class="">Покана за последващо посещение</div>
             <div class="flex-1"></div>
             <BasicToggle v-model:enabled="state.canned_service.enabled"/>
         </div>
