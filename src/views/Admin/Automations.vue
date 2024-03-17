@@ -75,7 +75,7 @@
             <StarIcon class="w-6"/>
             <div class="">Покана за последващо съобщение</div>
             <div class="flex-1"></div>
-            <!--            <BasicToggle v-model:enabled="state.follow_up.enabled"/>-->
+            <BasicToggle v-model:enabled="state.canned_service.enabled"/>
         </div>
         <div class="text-sm">
             Изпратете съобщение на клиентите си с напомняне за повторно посещение за дадена услуга. Пример: Изпратете напомняне за смяна на маслото на автомобила 6 месеца след посещението на клиента.

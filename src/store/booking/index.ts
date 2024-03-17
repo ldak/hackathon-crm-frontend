@@ -33,7 +33,7 @@ export const useBookingStore = defineStore('user', {
         getCustomer: (state): CustomerI => state.customer,
     },
     actions: {
-        async loadStore(account_id: string){
+        async loadInfo(account_id: string){
             const [
                 {
                     data: account

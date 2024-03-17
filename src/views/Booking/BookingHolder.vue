@@ -61,7 +61,7 @@ const goBack = async ()=>{
 }
 
 onMounted(async ()=>{
-    await bookingStore.loadStore(route.params.account);
+    await bookingStore.loadInfo(route.params.account);
 
 })
 </script>
