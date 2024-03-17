@@ -11,7 +11,7 @@
                     leave-active-class="slide-out-bottom"
                     mode="out-in">
             <div v-if="state.otp"
-                 class="pt-3 px-6 pb-5 w-full border-t border-gray-250 absolute bottom-0 h-min flex gap-4 items-center justify-around">
+                 class="pt-3 px-6 pb-5 w-full border-t bg-white border-gray-250 absolute bottom-0 h-min flex gap-4 items-center justify-around">
                 <button @click="state.otp= null" class="secondary-button h-11 flex-1">
                     Отказ
                 </button>

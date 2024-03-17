@@ -1,6 +1,7 @@
 import {AxiosResponse} from "axios";
 import {AccountI, AvailabilityI} from "./interfaces";
 import client from "../client";
+import * as moment from "moment/moment";
 
 
 export default {
@@ -8,53 +9,8 @@ export default {
         show: async (account_id: string) :Promise<AxiosResponse<AccountI>> => {
             return client.get<AccountI>('account/' + account_id);
         },
-        getAvailability: async (account_id: string) =>{
-            return {
-                data: {
-                    '2024-03-19' : [
-                        {
-                            start: '2024-03-16 9:00:00',
-                            end: '2024-03-16 10:00:00 UTC',
-                        },
-                        // {
-                        //     start: '2024-03-16 10:00',
-                        //     end: '2024-03-16 11:00',
-                        // },
-                        // {
-                        //     start: '2024-03-16 11:00',
-                        //     end: '2024-03-16 12:00',
-                        // }
-                    ],
-                    // '2024-03-17' : [
-                    //     {
-                    //         start: '2024-03-16 9:00',
-                    //         end: '2024-03-16 10:00',
-                    //     },
-                    //     {
-                    //         start: '2024-03-16 10:00',
-                    //         end: '2024-03-16 11:00',
-                    //     },
-                    //     {
-                    //         start: '2024-03-16 11:00',
-                    //         end: '2024-03-16 12:00',
-                    //     }
-                    // ],
-                    // '2024-03-18' : [
-                    //     {
-                    //         start: '2024-03-16 9:00',
-                    //         end: '2024-03-16 10:00',
-                    //     },
-                    //     {
-                    //         start: '2024-03-16 10:00',
-                    //         end: '2024-03-16 11:00',
-                    //     },
-                    //     {
-                    //         start: '2024-03-16 11:00',
-                    //         end: '2024-03-16 12:00',
-                    //     }
-                    // ]
-                }
-            };
+        getAvailability: async (account_id: string, service_uuid: string):Promise<AxiosResponse<AvailabilityI>> =>{
+            return client.get<AvailabilityI>('account/' + account_id + `/availability?start_date=${moment().format('YYYY-MM-DD')}&end_date=${moment().add(1, 'month').format('YYYY-MM-DD')}&service_uuid=${service_uuid}`);
         }
     }
 }

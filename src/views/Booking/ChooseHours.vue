@@ -20,6 +20,21 @@
                 </div>
             </div>
             <div class="flex transition-all duration-500 " :style="transitionComputed">
+                <button :disabled="!bookingStore.getAvailability[moment(state.baseDate).format('YYYY-MM-DD')]"
+                        class="flex flex-col gap-2 items-center cursor-pointer disabled:opacity-70"
+                        style="min-width: 20%"
+                        @click="state.selectedDate = moment(state.baseDate).toDate()">
+                    <span class="text-sm text-gray-600"
+                          :class="{
+                            'text-blue-400': moment(state.baseDate).diff(state.selectedDate, 'days')==0,
+                        }">
+                        {{moment().locale('bg').format('ddd')}}
+                    </span>
+                    <span class="w-9 h-9 flex-center text-md rounded-md"
+                          :class="{'bg-blue-400 text-white': moment(state.baseDate).diff(state.selectedDate, 'days')==0}">
+                        {{moment().format('D')}}
+                    </span>
+                </button>
                 <button v-for="i in 30"
                         :disabled="!bookingStore.getAvailability[moment(state.baseDate).add(i, 'days').format('YYYY-MM-DD')]"
                         class="flex flex-col gap-2 items-center cursor-pointer disabled:opacity-70"
@@ -45,7 +60,7 @@
                         'secondary-button' : hour.start !== state.selectedHour,
                         'primary-button' : hour.start === state.selectedHour
                     }">
-                    {{moment(hour.start, 'YYYY-MM-DD HH:mm:ss').format('HH:mm')}}
+                    {{moment(hour.start).format('HH:mm')}}
                 </button>
             </div>
         </div>
@@ -53,7 +68,7 @@
      <transition enter-active-class="slide-in-bottom"
                     leave-active-class="slide-out-bottom"
                     mode="out-in">
-        <div v-if="state.selectedHour" class="pt-3 px-6 pb-5 w-full border-t border-gray-250 absolute bottom-0 h-min flex gap-4 items-center justify-around">
+        <div v-if="state.selectedHour" class="pt-3 px-6 pb-5 w-full border-t bg-white border-gray-250 absolute bottom-0 h-min flex gap-4 items-center justify-around">
             <button @click="state.selectedHour = null" class="secondary-button h-11 flex-1">
                 Отказ
             </button>
@@ -110,7 +125,7 @@ const submit = ()=>{
 }
 
 onBeforeMount(()=>{
-   bookingStore.selectService(bookingStore.getSelectedService);
+   // bookingStore.selectService(bookingStore.getSelectedService);
 });
 </script>
 

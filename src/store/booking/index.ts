@@ -46,9 +46,12 @@ export const useBookingStore = defineStore('user', {
             this.services = services;
         },
         async selectService(service: ServiceI){
+            console.log(service, this.account);
+            let account_uuid = this.account.uuid;
+            let service_uuid = service.uuid;
             const {
                 data: availability
-            } = await accountService.get.getAvailability(this.account.uuid);
+            } = await accountService.get.getAvailability(account_uuid, service_uuid);
             this.availability = availability;
             this.selectedService = service;
         },
