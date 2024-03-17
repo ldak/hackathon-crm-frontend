@@ -1,7 +1,7 @@
 # AppointMate - Vue.JS Frontend
 
 ## Description
-AppointMate connects small to medium bussiness with their clients by providing them with an easy to use tool
+AppointMate connects small to medium business with their clients by providing them with an easy to use tool
 for booking and managing appointments. We aim to improve the connection between shop owners and customers by
 allowing them to have a more transperent communication through our automatizations - tool for customer retention
 and feedback.
