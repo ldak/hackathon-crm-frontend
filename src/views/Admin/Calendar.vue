@@ -10,8 +10,8 @@ import interactionPlugin from '@fullcalendar/interaction'
 import bgLocale from '@fullcalendar/core/locales/bg';
 
 import appointmentService from "../../services/appointmentService";
-import * as _moment from "moment/moment";
-const moment = _moment
+import moment from 'moment';
+
 
 const handleDateClick = (arg) => {
     alert('date click! ' + arg.dateStr)
